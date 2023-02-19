@@ -11,7 +11,7 @@ import SidebarLink from "./sidebar-link";
 
 function UserSidebar() {
   return (
-    <aside className="w-[250px] space-y-2 p-4">
+    <aside className="sticky top-[50px] w-[250px] space-y-2 bg-white p-4">
       <SidebarLink label="Feed" path="/feed" icon={<HomeIcon />} />
       <SidebarLink
         label="My Community"
