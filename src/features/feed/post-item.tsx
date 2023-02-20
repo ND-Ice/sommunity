@@ -11,7 +11,7 @@ import { formatDistanceToNowStrict } from "date-fns";
 type PostHeaderProps = {
   userId: string;
   createdAt: Date | string;
-  audience: "PUBLIC" | "PRIVATE";
+  audience: "PUBLIC" | "PRIVATE" | "FRIENDS";
 };
 type PostBodyProps = {
   images?: string[];

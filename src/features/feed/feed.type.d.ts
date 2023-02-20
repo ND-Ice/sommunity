@@ -1,7 +1,7 @@
 export type Post = {
   id: string;
   userId: string;
-  audience: "PUBLIC" | "PRIVATE";
+  audience: "PUBLIC" | "PRIVATE" | "FRIENDS";
   createdAt: Date | string;
   details: {
     description?: string;
