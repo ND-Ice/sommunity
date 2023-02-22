@@ -10,7 +10,7 @@ import {
 import Image from "next/image";
 import classNames from "classnames";
 
-type CreatePostModalProps = {
+type ReportPostModalProps = {
   isOpen: boolean;
   onClose: () => void;
 };
@@ -20,7 +20,7 @@ const audiences = [
   { label: "Private", value: "PRIVATE" },
 ];
 
-function CreatePostModal({ isOpen, onClose }: CreatePostModalProps) {
+function ReportPostModal({ isOpen, onClose }: ReportPostModalProps) {
   const [selected, setSelected] = useState(audiences[0]);
 
   return (
@@ -150,4 +150,4 @@ function CreatePostModal({ isOpen, onClose }: CreatePostModalProps) {
   );
 }
 
-export default CreatePostModal;
+export default ReportPostModal;
