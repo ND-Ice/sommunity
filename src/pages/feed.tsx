@@ -3,7 +3,7 @@ import { type NextPageWithLayout } from "./_app";
 
 import type { Post } from "@features/feed/feed.type";
 
-import { posts } from "@data/post";
+import posts from "@data/post.json";
 import { useModalStore } from "store/use-modal-store";
 import { FeedModals } from "@features/feed/feed.modals";
 

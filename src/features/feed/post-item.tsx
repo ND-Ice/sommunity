@@ -50,10 +50,7 @@ const PostHeader = ({
         <h1 className="text-base font-semibold">Sepural Gallery</h1>
         <div className="space-x-2 text-xs font-medium">
           {createdAt && (
-            <span>
-              {typeof createdAt === "object" &&
-                formatDistanceToNowStrict(createdAt)}
-            </span>
+            <span>{formatDistanceToNowStrict(new Date(createdAt))}</span>
           )}
           <span>{audience}</span>
         </div>
