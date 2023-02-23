@@ -1,19 +1,60 @@
 import { type ReactElement } from "react";
 import { type NextPageWithLayout } from "./_app";
+
+import type { Post } from "@features/feed/feed.type";
+
+import { posts } from "@data/post";
+import { useModalStore } from "store/use-modal-store";
+import { FeedModals } from "@features/feed/feed.modals";
+
+import { usePostStore } from "store/use-post-store";
 import FeedLayout from "@layouts/feed-layout";
 import PostBox from "@features/feed/post-box";
 import PostItem from "@features/feed/post-item";
+import CreatePostModal from "@features/feed/create-post-modal";
+import ReportPostModal from "@features/feed/report-post-modal";
+import ReportSuccessModal from "@features/feed/report-success-modal";
 
 const Feed: NextPageWithLayout = () => {
+  const postLists = posts as Post[];
+  const { openModal, modal, closeModal } = useModalStore();
+  const { selectPost } = usePostStore();
+
+  const addPostClickHandler = () => openModal(FeedModals.CreatePost);
+  const reportPostClickHandler = (postId: string) => {
+    openModal(FeedModals.ReportPost);
+    selectPost(postId);
+  };
+  const reportPostHandler = () => openModal(FeedModals.ReportSuccess);
+
   return (
-    <div className="h-full p-4">
-      <PostBox />
-      <div className="mt-4 space-y-4">
-        <PostItem />
-        <PostItem />
-        <PostItem />
+    <>
+      <div className="h-full p-4">
+        <PostBox onAddPostClick={addPostClickHandler} />
+        <div className="mt-4 space-y-4">
+          {postLists?.map((post) => (
+            <PostItem
+              key={post.id}
+              post={post}
+              onReportPostClick={reportPostClickHandler}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+      <CreatePostModal
+        isOpen={modal === FeedModals.CreatePost}
+        onClose={closeModal}
+      />
+      <ReportPostModal
+        onReportPostClick={reportPostHandler}
+        isOpen={modal === FeedModals.ReportPost}
+        onClose={closeModal}
+      />
+      <ReportSuccessModal
+        isOpen={modal === FeedModals.ReportSuccess}
+        onClose={closeModal}
+      />
+    </>
   );
 };
 

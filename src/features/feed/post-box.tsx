@@ -4,9 +4,12 @@ import {
   VideoCameraIcon,
 } from "@heroicons/react/24/solid";
 import Image from "next/image";
-import React from "react";
 
-function PostBox() {
+type PostBoxProps = {
+  onAddPostClick: () => void;
+};
+
+function PostBox({ onAddPostClick }: PostBoxProps) {
   return (
     <div className="max-w-xl rounded-lg bg-white p-6 shadow-sm">
       <div className="flex gap-4">
@@ -17,22 +20,33 @@ function PostBox() {
             alt="User Avatar"
           />
         </div>
-        <input
-          placeholder="Whats Happening?"
-          className="flex-1 rounded-lg bg-gray-50 p-2 px-4 outline-none"
-        />
+        <div
+          onClick={onAddPostClick}
+          className="flex-1 cursor-pointer rounded-lg bg-gray-50 p-2 px-4 text-gray-600 transition-all duration-100 ease-linear hover:bg-gray-100"
+        >
+          Whats Happening?
+        </div>
       </div>
       <div className="mt-4 flex items-center justify-between gap-4">
         <div className="flex gap-2">
-          <div className="flex items-center gap-2 rounded-lg p-2 px-4 text-gray-600 hover:bg-gray-100">
+          <div
+            onClick={onAddPostClick}
+            className="flex cursor-pointer items-center gap-2 rounded-lg p-2 px-4 text-gray-600 hover:bg-gray-100"
+          >
             <VideoCameraIcon className="h-5 w-5" />
             <span>Live Video</span>
           </div>
-          <div className="flex items-center gap-2 rounded-lg p-2 px-4 text-gray-600 hover:bg-gray-100">
+          <div
+            onClick={onAddPostClick}
+            className="flex cursor-pointer items-center gap-2 rounded-lg p-2 px-4 text-gray-600 hover:bg-gray-100"
+          >
             <PhotoIcon className="h-5 w-5" />
             <span>Photo/Video</span>
           </div>
-          <div className="flex items-center gap-2 rounded-lg p-2 px-4 text-gray-600 hover:bg-gray-100">
+          <div
+            onClick={onAddPostClick}
+            className="flex cursor-pointer items-center gap-2 rounded-lg p-2 px-4 text-gray-600 hover:bg-gray-100"
+          >
             <FaceSmileIcon className="h-5 w-5" />
             <span>Feeling</span>
           </div>
@@ -40,6 +54,7 @@ function PostBox() {
         <button
           type="button"
           className="rounded-lg bg-blue-500 p-2 px-8 text-white transition-all duration-100 ease-linear hover:bg-blue-500/80"
+          onClick={onAddPostClick}
         >
           Post
         </button>
