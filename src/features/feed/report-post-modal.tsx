@@ -1,27 +1,57 @@
-import { Fragment, useState } from "react";
-import { Dialog, Listbox, Transition } from "@headlessui/react";
-import {
-  ChevronDownIcon,
-  FaceSmileIcon,
-  PhotoIcon,
-  VideoCameraIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/solid";
-import Image from "next/image";
 import classNames from "classnames";
+import { Fragment, useState } from "react";
+import { Dialog, RadioGroup, Transition } from "@headlessui/react";
+import { CheckIcon, XMarkIcon } from "@heroicons/react/24/solid";
 
 type ReportPostModalProps = {
   isOpen: boolean;
   onClose: () => void;
+  onReportPostClick: () => void;
 };
-const audiences = [
-  { label: "Friends", value: "FRIENDS" },
-  { label: "Public", value: "PUBLIC" },
-  { label: "Private", value: "PRIVATE" },
+
+type ReportCategory = { label: string; value: string };
+
+const reportCategories: ReportCategory[] = [
+  {
+    label: "Its a spam",
+    value: "spam",
+  },
+  {
+    label: "Nudity or sexual activity",
+    value: "nudity",
+  },
+  {
+    label: "False Information",
+    value: "false information",
+  },
+  {
+    label: "Its abusive or harmful",
+    value: "abusive",
+  },
+  {
+    label: "Sale of illegal or regulated goods",
+    value: "illegal",
+  },
+  {
+    label: "Intellectual property infringement or defamation",
+    value: "defamation",
+  },
+  {
+    label: "Violence or physical harm",
+    value: "violence",
+  },
+  {
+    label: "I'm still not interested in this",
+    value: "not interested",
+  },
 ];
 
-function ReportPostModal({ isOpen, onClose }: ReportPostModalProps) {
-  const [selected, setSelected] = useState(audiences[0]);
+function ReportPostModal({
+  isOpen,
+  onClose,
+  onReportPostClick,
+}: ReportPostModalProps) {
+  const [selected, setSelected] = useState(reportCategories[0]);
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -55,90 +85,69 @@ function ReportPostModal({ isOpen, onClose }: ReportPostModalProps) {
                     as="h3"
                     className="text-xl font-bold leading-6 text-gray-600"
                   >
-                    Create Post
+                    Report an Issue
                   </Dialog.Title>
-                  <div className="flex items-center gap-2">
-                    <Listbox value={selected} onChange={setSelected}>
-                      <div className="relative mt-1">
-                        <Listbox.Button className="relative flex w-full cursor-pointer items-center rounded-lg bg-gray-50 py-2 pl-3 pr-10 text-left hover:bg-gray-100 focus:outline-none">
-                          <span className="block truncate">
-                            {selected?.label}
-                          </span>
-                          <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                            <ChevronDownIcon
-                              className="h-4 w-4 text-gray-400"
-                              aria-hidden="true"
-                            />
-                          </span>
-                        </Listbox.Button>
-                        <Transition
-                          as={Fragment}
-                          leave="transition ease-in duration-100"
-                          leaveFrom="opacity-100"
-                          leaveTo="opacity-0"
-                        >
-                          <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                            {audiences.map((person, personIdx) => (
-                              <Listbox.Option
-                                key={personIdx}
-                                className={({ selected }) =>
-                                  classNames(
-                                    "relative cursor-pointer select-none p-2 px-4",
-                                    { "bg-blue-100 text-blue-900": selected }
-                                  )
-                                }
-                                value={person}
-                              >
-                                {person?.label}
-                              </Listbox.Option>
-                            ))}
-                          </Listbox.Options>
-                        </Transition>
-                      </div>
-                    </Listbox>
-                    <div
-                      onClick={onClose}
-                      className="grid h-8 w-8 cursor-pointer place-items-center rounded-full transition-all duration-300 ease-linear hover:bg-gray-100"
-                    >
-                      <XMarkIcon className="h-5 w-5" />
-                    </div>
-                  </div>
-                </div>
-                <div className="my-6 flex gap-4">
-                  <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-full">
-                    <Image
-                      fill
-                      src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-                      alt="User Profile"
-                    />
-                  </div>
-                  <textarea
-                    className="w-full rounded-lg bg-gray-50 p-2 px-4 outline-none"
-                    placeholder="Whats happening?"
-                    rows={4}
-                  />
-                </div>
-
-                <div className="flex justify-between gap-6">
-                  <div className="flex gap-2">
-                    <div className="flex cursor-pointer items-center gap-2 rounded-lg p-2 px-4 text-gray-600 hover:bg-gray-100">
-                      <VideoCameraIcon className="h-5 w-5" />
-                      <span>Live Video</span>
-                    </div>
-                    <div className="flex cursor-pointer items-center gap-2 rounded-lg p-2 px-4 text-gray-600 hover:bg-gray-100">
-                      <PhotoIcon className="h-5 w-5" />
-                      <span>Photo/Video</span>
-                    </div>
-                    <div className="flex cursor-pointer items-center gap-2 rounded-lg p-2 px-4 text-gray-600 hover:bg-gray-100">
-                      <FaceSmileIcon className="h-5 w-5" />
-                      <span>Feeling</span>
-                    </div>
-                  </div>
                   <button
-                    type="button"
-                    className="rounded-lg bg-blue-500 p-2 px-6 text-white transition-all duration-100 ease-linear hover:bg-blue-500/90"
+                    onClick={onClose}
+                    className="grid h-8 w-8 cursor-pointer place-items-center rounded-full transition-all duration-300 ease-linear hover:bg-gray-100"
                   >
-                    Post
+                    <XMarkIcon className="h-5 w-5" />
+                  </button>
+                </div>
+                <div className="my-6">
+                  <RadioGroup value={selected} onChange={setSelected}>
+                    <RadioGroup.Label className="sr-only">
+                      Server size
+                    </RadioGroup.Label>
+                    <div className="space-y-2">
+                      {reportCategories.map((category) => (
+                        <RadioGroup.Option
+                          key={category.label}
+                          value={category.value}
+                          className={({ checked }) =>
+                            classNames(
+                              "relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md transition-all duration-100 ease-linear focus:outline-none",
+                              { "bg-sky-500 bg-opacity-75 text-white": checked }
+                            )
+                          }
+                        >
+                          {({ checked }) => (
+                            <>
+                              <div className="flex w-full items-center justify-between">
+                                <div className="flex items-center">
+                                  <div className="text-sm">
+                                    <RadioGroup.Label
+                                      as="p"
+                                      className={classNames("font-medium", {
+                                        "text-white": checked,
+                                        "text-gray-900": !checked,
+                                      })}
+                                    >
+                                      {category.label}
+                                    </RadioGroup.Label>
+                                  </div>
+                                </div>
+                                {checked && <CheckIcon className="h-4 w-4" />}
+                              </div>
+                            </>
+                          )}
+                        </RadioGroup.Option>
+                      ))}
+                    </div>
+                  </RadioGroup>
+                </div>
+                <div className="flex justify-between gap-6">
+                  <button
+                    onClick={onClose}
+                    className="rounded-lg border border-gray-400 p-2  px-6 transition-all duration-100 ease-linear hover:bg-gray-100"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={onReportPostClick}
+                    className="rounded-lg bg-blue-500 p-2 px-6 text-white transition-all duration-100 ease-linear hover:bg-blue-500/80"
+                  >
+                    Submit
                   </button>
                 </div>
               </Dialog.Panel>

@@ -13,6 +13,7 @@ import PostBox from "@features/feed/post-box";
 import PostItem from "@features/feed/post-item";
 import CreatePostModal from "@features/feed/create-post-modal";
 import ReportPostModal from "@features/feed/report-post-modal";
+import ReportSuccessModal from "@features/feed/report-success-modal";
 
 const Feed: NextPageWithLayout = () => {
   const postLists = posts as Post[];
@@ -24,6 +25,7 @@ const Feed: NextPageWithLayout = () => {
     openModal(FeedModals.ReportPost);
     selectPost(postId);
   };
+  const reportPostHandler = () => openModal(FeedModals.ReportSuccess);
 
   return (
     <>
@@ -44,7 +46,12 @@ const Feed: NextPageWithLayout = () => {
         onClose={closeModal}
       />
       <ReportPostModal
+        onReportPostClick={reportPostHandler}
         isOpen={modal === FeedModals.ReportPost}
+        onClose={closeModal}
+      />
+      <ReportSuccessModal
+        isOpen={modal === FeedModals.ReportSuccess}
         onClose={closeModal}
       />
     </>
