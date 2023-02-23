@@ -11,7 +11,7 @@ export const usePostStore = create<State & Action>()(
         selectedPostId: "",
         selectPost: (postId: string) => set(() => ({ selectedPostId: postId })),
       }),
-      { name: "post-storage", storage: createJSONStorage(() => localStorage) }
+      { name: "post-storage", storage: createJSONStorage(() => sessionStorage) }
     )
   )
 );

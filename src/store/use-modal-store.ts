@@ -12,7 +12,7 @@ export const useModalStore = create<State & Action>()(
         openModal: (modal: string) => set(() => ({ modal })),
         closeModal: () => set(() => ({ modal: "" })),
       }),
-      { name: "modal-store", storage: createJSONStorage(() => localStorage) }
+      { name: "modal-store", storage: createJSONStorage(() => sessionStorage) }
     )
   )
 );
