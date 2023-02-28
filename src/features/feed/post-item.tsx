@@ -89,11 +89,14 @@ const PostHeader = ({
 );
 
 const PostBody = ({ images, description }: PostBodyProps) => (
-  <div className="space-y-2">
+  <div className="space-y-4">
     <p className="text-sm text-gray-500">{description}</p>
-    <div>
+    <div className="grid gap-2">
       {images?.map((image, idx) => (
-        <div className="relative h-[100px]" key={idx}>
+        <div
+          className="relative h-[100px] overflow-hidden rounded-lg"
+          key={idx}
+        >
           <Image src={image} className="object-cover" fill alt="Post Image" />
         </div>
       ))}
@@ -151,7 +154,7 @@ const PostFooter = ({ reactions }: PostFooterProps) => {
 
 function PostItem({ post, onReportPostClick }: PostItemProps) {
   return (
-    <div className="max-w-xl space-y-4 rounded-lg bg-white p-4">
+    <div className="space-y-4 rounded-lg bg-white p-4">
       <PostHeader
         audience={post.audience}
         createdAt={post.createdAt}

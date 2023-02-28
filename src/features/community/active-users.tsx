@@ -11,6 +11,29 @@ interface ActiveUserButtonProps extends ActiveUser {
   onClick?: () => void;
 }
 
+type UserStoryButtonProps = {
+  name: string;
+  imageUrl: string;
+};
+
+function UserStoryButton({ name, imageUrl }: UserStoryButtonProps) {
+  return (
+    <button className="w-max text-center">
+      <div className="relative h-12 w-12 rounded-full border-[3px] border-blue-400">
+        <Image
+          src={imageUrl}
+          alt="User Story"
+          className="rounded-full object-cover"
+          fill
+        />
+      </div>
+      <span className="mt-2 block text-sm font-medium text-gray-700">
+        {name}
+      </span>
+    </button>
+  );
+}
+
 function ActiveUserButton({
   name,
   isActive,
@@ -40,19 +63,37 @@ function ActiveUserButton({
 
 function ActiveUsers() {
   return (
-    <aside className="sticky top-[50px] w-[300px] p-4">
-      <header>
+    <aside className="sticky top-[70px] w-[300px] p-4">
+      <header className="mb-6">
         <div className="relative flex items-center gap-2 text-gray-500">
           <MagnifyingGlassIcon className="absolute left-2 h-4 w-4" />
           <input
             placeholder="Search for friends"
-            className="h-full w-full rounded-lg border-2 border-gray-400 bg-none p-2 px-4 pl-8 outline-none"
+            className="h-full w-full rounded-lg border border-gray-400 bg-none p-2 px-4 pl-8 outline-none"
           />
         </div>
       </header>
-      <div className="mt-4">
+      <div className="my-6 grid select-none grid-cols-4 gap-4 overflow-x-auto">
+        <UserStoryButton
+          name="Joshua"
+          imageUrl="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+        />
+        <UserStoryButton
+          name="Joshua"
+          imageUrl="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+        />
+        <UserStoryButton
+          name="Joshua"
+          imageUrl="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+        />
+        <UserStoryButton
+          name="Joshua"
+          imageUrl="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+        />
+      </div>
+      <div>
         <header className="mb-4 flex items-center justify-between gap-2 text-gray-800">
-          <h2 className="text-lg font-medium">Friends</h2>
+          <h2 className="text-base font-bold">Friends</h2>
           <button className="grid h-8 w-8 place-items-center rounded-full hover:bg-gray-100">
             <EllipsisHorizontalIcon className="h-6 w-6" />
           </button>

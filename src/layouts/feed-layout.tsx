@@ -9,7 +9,7 @@ type FeedLayoutProps = {
 
 function FeedLayout({ children }: FeedLayoutProps) {
   return (
-    <div className="grid h-screen grid-rows-[auto_1fr] overflow-auto">
+    <div className="grid h-screen grid-rows-[auto_1fr]">
       <Navbar />
       <div className="grid h-full grid-cols-[auto_1fr_auto] items-start">
         <UserSidebar />
