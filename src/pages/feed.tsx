@@ -8,7 +8,7 @@ import { useModalStore } from "store/use-modal-store";
 import { FeedModals } from "@features/feed/feed.modals";
 
 import { usePostStore } from "store/use-post-store";
-import FeedLayout from "@layouts/feed-layout";
+import MainLayout from "@layouts/main-layout";
 import PostBox from "@features/feed/post-box";
 import PostItem from "@features/feed/post-item";
 import CreatePostModal from "@features/feed/create-post-modal";
@@ -66,5 +66,5 @@ const Feed: NextPageWithLayout = () => {
   );
 };
 
-Feed.getLayout = (page: ReactElement) => <FeedLayout>{page}</FeedLayout>;
+Feed.getLayout = (page: ReactElement) => <MainLayout>{page}</MainLayout>;
 export default Feed;
