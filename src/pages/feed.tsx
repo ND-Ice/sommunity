@@ -31,7 +31,7 @@ const Feed: NextPageWithLayout = () => {
 
   return (
     <>
-      <div className="grid h-full grid-cols-[1fr_auto] gap-6 p-6">
+      <div className="grid h-full grid-cols-[1fr_auto] items-start gap-6 p-6">
         <div>
           <PostBox onAddPostClick={addPostClickHandler} />
           <div className="mt-6 space-y-6">
@@ -44,7 +44,7 @@ const Feed: NextPageWithLayout = () => {
             ))}
           </div>
         </div>
-        <div className="w-[350px] space-y-6">
+        <div className="sticky top-[95px] w-[350px] space-y-6">
           <PeopleYouMightLike imageUrl="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" />
           <UpcomingBirthdays />
         </div>

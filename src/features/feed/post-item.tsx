@@ -154,7 +154,7 @@ const PostFooter = ({ reactions }: PostFooterProps) => {
 
 function PostItem({ post, onReportPostClick }: PostItemProps) {
   return (
-    <div className="space-y-4 rounded-lg bg-white p-4">
+    <div className="space-y-4 rounded-lg bg-white p-4 shadow-sm">
       <PostHeader
         audience={post.audience}
         createdAt={post.createdAt}
