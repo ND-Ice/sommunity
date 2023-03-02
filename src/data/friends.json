@@ -1,0 +1,7 @@
+[
+  { "id": "1", "userId": 1, "name": "Joshua Dela Cruz", "isFriend": false },
+  { "id": "2", "userId": 2, "name": "Ezekiel Dela Cruz", "isFriend": true },
+  { "id": "3", "userId": 2, "name": "Rhael Dela Cruz", "isFriend": true },
+  { "id": "4", "userId": 2, "name": "John Louie Dela Cruz", "isFriend": false },
+  { "id": "5", "userId": 2, "name": "Kamote Kid", "isFriend": false }
+]
