@@ -11,7 +11,7 @@ type PostBoxProps = {
 
 function PostBox({ onAddPostClick }: PostBoxProps) {
   return (
-    <div className="max-w-xl rounded-lg bg-white p-6 shadow-sm">
+    <div className="rounded-lg bg-white p-6 shadow-sm">
       <div className="flex gap-4">
         <div className="relative h-10 w-10 overflow-hidden rounded-full">
           <Image
@@ -28,28 +28,28 @@ function PostBox({ onAddPostClick }: PostBoxProps) {
         </div>
       </div>
       <div className="mt-4 flex items-center justify-between gap-4">
-        <div className="flex gap-2">
-          <div
+        <div className="flex gap-4">
+          <button
             onClick={onAddPostClick}
-            className="flex cursor-pointer items-center gap-2 rounded-lg p-2 px-4 text-gray-600 hover:bg-gray-100"
+            className="flex flex-shrink-0 cursor-pointer items-center gap-2 rounded-lg p-2 text-gray-600 hover:bg-gray-100"
           >
             <VideoCameraIcon className="h-5 w-5" />
             <span>Live Video</span>
-          </div>
-          <div
+          </button>
+          <button
             onClick={onAddPostClick}
-            className="flex cursor-pointer items-center gap-2 rounded-lg p-2 px-4 text-gray-600 hover:bg-gray-100"
+            className="flex flex-shrink-0 cursor-pointer items-center gap-2 rounded-lg p-2 text-gray-600 hover:bg-gray-100"
           >
             <PhotoIcon className="h-5 w-5" />
             <span>Photo/Video</span>
-          </div>
-          <div
+          </button>
+          <button
             onClick={onAddPostClick}
-            className="flex cursor-pointer items-center gap-2 rounded-lg p-2 px-4 text-gray-600 hover:bg-gray-100"
+            className="flex flex-shrink-0 cursor-pointer items-center gap-2 rounded-lg p-2 text-gray-600 hover:bg-gray-100"
           >
             <FaceSmileIcon className="h-5 w-5" />
             <span>Feeling</span>
-          </div>
+          </button>
         </div>
         <button
           type="button"

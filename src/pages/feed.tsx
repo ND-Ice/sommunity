@@ -8,12 +8,14 @@ import { useModalStore } from "store/use-modal-store";
 import { FeedModals } from "@features/feed/feed.modals";
 
 import { usePostStore } from "store/use-post-store";
-import FeedLayout from "@layouts/feed-layout";
+import MainLayout from "@layouts/main-layout";
 import PostBox from "@features/feed/post-box";
 import PostItem from "@features/feed/post-item";
 import CreatePostModal from "@features/feed/create-post-modal";
 import ReportPostModal from "@features/feed/report-post-modal";
 import ReportSuccessModal from "@features/feed/report-success-modal";
+import PeopleYouMightLike from "@features/widgets/people-you-might-like";
+import UpcomingBirthdays from "@features/widgets/upcoming-birthdays";
 
 const Feed: NextPageWithLayout = () => {
   const postLists = posts as Post[];
@@ -29,16 +31,22 @@ const Feed: NextPageWithLayout = () => {
 
   return (
     <>
-      <div className="h-full p-4">
-        <PostBox onAddPostClick={addPostClickHandler} />
-        <div className="mt-4 space-y-4">
-          {postLists?.map((post) => (
-            <PostItem
-              key={post.id}
-              post={post}
-              onReportPostClick={reportPostClickHandler}
-            />
-          ))}
+      <div className="grid h-full grid-cols-[1fr_auto] items-start gap-6 p-6">
+        <div>
+          <PostBox onAddPostClick={addPostClickHandler} />
+          <div className="mt-6 space-y-6">
+            {postLists?.map((post) => (
+              <PostItem
+                key={post.id}
+                post={post}
+                onReportPostClick={reportPostClickHandler}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="sticky top-[95px] w-[350px] space-y-6">
+          <PeopleYouMightLike imageUrl="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" />
+          <UpcomingBirthdays />
         </div>
       </div>
       <CreatePostModal
@@ -58,5 +66,5 @@ const Feed: NextPageWithLayout = () => {
   );
 };
 
-Feed.getLayout = (page: ReactElement) => <FeedLayout>{page}</FeedLayout>;
+Feed.getLayout = (page: ReactElement) => <MainLayout>{page}</MainLayout>;
 export default Feed;
